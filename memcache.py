@@ -56,19 +56,31 @@ import sys
 import threading
 import time
 import zlib
+import jump
 
 import six
 
+num_buckets = 0
+
+
+def jump_hash(key):
+    return jump.hash(int(key, 16), num_buckets)
+
+serverHashFunction = jump_hash
+
 
 def cmemcache_hash(key):
-    return (
-        (((binascii.crc32(key) & 0xffffffff)
-          >> 16) & 0x7fff) or 1)
-serverHashFunction = cmemcache_hash
+    return ((((binascii.crc32(key) & 0xffffffff) >> 16) & 0x7fff) or 1)
+
+
+def useOldCmemcacheHashFunction():
+    """Use the old python-memcache server hash function."""
+    global serverHashFunction
+    serverHashFunction = cmemcache_hash
 
 
 def useOldServerHashFunction():
-    """Use the old python-memcache server hash function."""
+    """Use the oldest python-memcache server hash function."""
     global serverHashFunction
     serverHashFunction = binascii.crc32
 
@@ -216,6 +228,9 @@ class Client(threading.local):
         characters.
         """
         super(Client, self).__init__()
+        global num_buckets
+        num_buckets = len(servers)
+
         self.debug = debug
         self.dead_retry = dead_retry
         self.socket_timeout = socket_timeout
