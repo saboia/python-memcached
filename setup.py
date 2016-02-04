@@ -3,8 +3,8 @@
 from setuptools import setup  # noqa
 
 
-setup(name="python-memcached",
-      version="1.58",
+setup(name="python-memcached-globo",
+      version="1.58.globo",
       description="Pure python memcached client",
       long_description=open("README.md").read(),
       author="Evan Martin",
@@ -12,7 +12,6 @@ setup(name="python-memcached",
       maintainer="Sean Reifschneider",
       maintainer_email="jafo@tummy.com",
       url="http://www.tummy.com/Community/software/python-memcached/",
-      download_url="ftp://ftp.tummy.com/pub/python-memcached/",
       py_modules=["memcache"],
       install_requires=open('requirements.txt').read().split(),
       classifiers=[

@@ -19,6 +19,10 @@ Please report issues and submit code changes to the github repository at:
 For changes prior to 2013-03-26, see the old Launchpad repository at:
 
    Historic issues: https://launchpad.net/python-memcached
+   
+## About this fork
+
+This fork was created due a necessity to use jump hash when generating keys.
 
 ## Testing
 
