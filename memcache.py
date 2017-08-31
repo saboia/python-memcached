@@ -64,7 +64,7 @@ num_buckets = 0
 
 
 def jump_hash(key):
-    return jump.hash(key, num_buckets)
+    return jump.hash(int(key), num_buckets)
 
 serverHashFunction = jump_hash
 
